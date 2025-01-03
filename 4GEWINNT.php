@@ -147,39 +147,47 @@ function placechip($col){
 }
 
 function checkwin($row, $col){
-    return $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 1][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 2][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 3][$col] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 1][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 2][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 3][$col] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row][$col + 1] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row][$col + 2] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row][$col + 3] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row][$col - 1] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row][$col - 2] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row][$col - 3] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 1][$col + 1] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 2][$col + 2] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 3][$col + 3] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 1][$col - 1] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 2][$col - 2] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 3][$col - 3] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 1][$col - 1] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 2][$col - 2] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row + 3][$col - 3] === $_SESSION["currentplayer"] ||
-    $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 1][$col + 1] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 2][$col + 2] === $_SESSION["currentplayer"]
-    && $_SESSION["board"][$row - 3][$col + 3] === $_SESSION["currentplayer"] ? true : false;
-
+    for ($row = 0; $row <= 5; $row++) {
+        for ($col = 0; $col <= 6; $col++) {
+          if (
+            $row <= 2 &&
+            $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 1][$col] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 2][$col] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 3][$col] === $_SESSION["currentplayer"]
+          ) {
+            return true;
+          } else if (
+            $col <= 3 &&
+            $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row][$col + 1] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row][$col + 2] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row][$col + 3] === $_SESSION["currentplayer"]
+          ) {
+            return true;
+          } else if (
+            $row <= 2 &&
+            $col <= 3 &&
+            $_SESSION["board"][$row][$col] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 1][$col + 1] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 2][$col + 2] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 3][$col + 3] === $_SESSION["currentplayer"]
+          ) {
+            return true;
+          } else if (
+            $row <= 2 &&
+            $col <= 3 &&
+            $_SESSION["board"][$row][$col + 3] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 1][$col + 2] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 2][$col + 1] === $_SESSION["currentplayer"] &&
+            $_SESSION["board"][$row + 3][$col] === $_SESSION["currentplayer"]
+          ) {
+            return true;
+          }
+        }
+      }
+    
+      return false;
 }
 
 function swapplayer(){
@@ -207,7 +215,7 @@ function botturn(){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4-GEWINNT</title>
+    <title>4GEWINNT</title>
     <style>
     body {
         all: initial;
@@ -272,7 +280,7 @@ function botturn(){
 </head>
 
 <body>
-    <h1>4-GEWINNT</h1>
+    <h1>4GEWINNT</h1>
     <div id="board">
         <form method="post">
             <?php

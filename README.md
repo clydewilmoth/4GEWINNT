@@ -2,7 +2,7 @@
 
 Built in PHP.
 
-## How to host local live server
+## How to host local server
 
 > Make sure PHP is installed.
 
